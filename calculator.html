@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debt Calculator - Debt Crusher</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-shield-alt"></i>
+          <h1>Debt Crusher</h1>
+        </div>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="calculator.html" class="active">Debt Calculator</a>
+          <a href="budget.html">Budget Planner</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <h2><i class="fas fa-calculator"></i> Debt Payoff Calculator</h2>
+
+      <div class="summary-bar">
+        <div class="summary-card">
+          <p>Total Debt</p>
+          <h2 id="totalDebt">$0</h2>
+        </div>
+        <div class="summary-card">
+          <p>Monthly Extra</p>
+          <h2 id="monthlyExtra">$0</h2>
+        </div>
+      </div>
+
+      <div class="step">
+        <h3><i class="fas fa-plus-circle"></i> Add Your Debts</h3>
+        <div class="form-grid">
+          <input type="text" id="debtName" placeholder="Debt Name">
+          <input type="number" id="debtAmount" placeholder="Balance ($)">
+          <input type="number" id="debtRate" placeholder="APR (%)" step="0.1">
+          <input type="number" id="debtMinPay" placeholder="Min Payment ($)">
+          <input type="number" id="debtPayDay" placeholder="Pay Day (1-31)" min="1" max="31">
+          <button onclick="addDebt()" class="add-btn">+ Add Debt</button>
+        </div>
+      </div>
+
+      <table id="debtTable">
+        <thead>
+          <tr><th>Debt</th><th>Balance</th><th>APR</th><th>Min Payment</th><th>Pay Day</th><th>Action</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="step">
+        <h3><i class="fas fa-dollar-sign"></i> Extra Monthly Payment</h3>
+        <input type="number" id="extraPayment" value="300" class="extra-input" oninput="updateSummary()">
+      </div>
+
+      <div class="step" id="upcoming-section" style="display:none;">
+        <h3><i class="fas fa-calendar"></i> Upcoming Payments</h3>
+        <div id="upcoming-payments"></div>
+      </div>
+
+      <div class="step">
+        <h3><i class="fas fa-target"></i> Choose Strategy</h3>
+        <div class="strategy-buttons">
+          <button onclick="setStrategy('avalanche')" class="strategy-btn avalanche">Debt Avalanche</button>
+          <button onclick="setStrategy('snowball')" class="strategy-btn snowball">Debt Snowball</button>
+        </div>
+      </div>
+
+      <button onclick="calculatePayoff()" class="calculate-btn">🚀 Calculate My Debt-Free Plan</button>
+
+      <div id="results" class="results" style="display:none;"></div>
+
+      <div class="charts">
+        <div class="chart-box">
+          <h4>Payoff Comparison</h4>
+          <canvas id="payoffChart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Debt Breakdown</h4>
+          <canvas id="debtBreakdownChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Debt Crusher • Educational Financial Tool</p>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
